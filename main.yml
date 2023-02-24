@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build the Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags:gabrieldocker01/myapp:1.0
+        build-args: |
+          ARG1=value1
+          ARG2=value2
